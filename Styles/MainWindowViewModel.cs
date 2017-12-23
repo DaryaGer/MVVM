@@ -61,9 +61,11 @@ namespace Styles
             StylesClick.Function = GetSubStyles;
             SubStylesClick.Function = GetInfo;
 			Translate.Function = GetTranslation;
+            //REVIEW:  Запрос в константу
             Styles = new List<string>(GetList("select distinct style from GeneralList"));
         }
 
+        //REVIEW: А зачем тут параметр типа Object? почему не String
         private void GetInfo(object obj)
         {
             if (obj == null || !(obj is string)) return;
@@ -74,7 +76,8 @@ namespace Styles
 			Translator t = new Translator();
 			Translation = t.Translate(Info);
 		}
-		private void GetSubStyles(object obj)
+        //REVIEW: Зачем параметр Object? 
+        private void GetSubStyles(object obj)
         {
             if (obj == null || !(obj is string)) return;
             SubStyles = new List<string>(GetList($"select substyle from GeneralList where style=\'{(string)obj}\'"));
